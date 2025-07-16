@@ -15,7 +15,6 @@ import java.util.Set;
 public class CustomConsumerSeek {
 
     public static void main(String[] args) {
-
         // 0 配置信息
         Properties properties = new Properties();
 
@@ -54,9 +53,7 @@ public class CustomConsumerSeek {
 
         // 3  消费数据
         while (true){
-
             ConsumerRecords<String, String> consumerRecords = kafkaConsumer.poll(Duration.ofSeconds(1));
-
             for (ConsumerRecord<String, String> consumerRecord : consumerRecords) {
 
                 System.out.println(consumerRecord);
