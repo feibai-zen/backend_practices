@@ -1,4 +1,4 @@
-package com.feibai.study.demos.multithread.lock;
+package com.feibai.study.demos.multithread.deadlock;
 
 /**
  * 死锁: 过多的同步可能造成相互不释放资源从而相互等待，一般发生于同步中持有多个对象的锁

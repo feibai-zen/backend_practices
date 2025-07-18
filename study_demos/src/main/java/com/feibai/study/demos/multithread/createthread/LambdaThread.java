@@ -43,7 +43,6 @@ public class LambdaThread {
                 System.out.println("一边听歌");
             }
         }).start();
-
     }
 
 }

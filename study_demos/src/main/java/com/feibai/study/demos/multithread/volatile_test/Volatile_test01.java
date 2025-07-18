@@ -1,5 +1,5 @@
 
-package com.feibai.study.demos.multithread.advanced.t01_review;
+package com.feibai.study.demos.multithread.volatile_test;
 
 import java.util.concurrent.TimeUnit;
 
@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit;
  * <p>
  * 用来通知os底层，数据修改可见性
  */
-public class Test_09_Volatile {
+public class Volatile_test01 {
 
   /*volatile*/ boolean b = true;
 
@@ -24,7 +24,7 @@ public class Test_09_Volatile {
   }
 
   public static void main(String[] args) {
-    final Test_09_Volatile t = new Test_09_Volatile();
+    final Volatile_test01 t = new Volatile_test01();
     new Thread(new Runnable() {
       @Override
       public void run() {

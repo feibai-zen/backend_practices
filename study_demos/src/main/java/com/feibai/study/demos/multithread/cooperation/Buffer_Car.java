@@ -1,6 +1,6 @@
 package com.feibai.study.demos.multithread.cooperation;
 
-public class Cooperation_Buffer_Car {
+public class Buffer_Car {
   public static void main(String[] args) {
     Buffer buffer = new Buffer();
     new Thread(new Productor_Car(buffer)).start();

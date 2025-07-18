@@ -1,4 +1,4 @@
-package com.feibai.study.demos.multithread.lock;
+package com.feibai.study.demos.multithread.create_new_lock;
 
 /**
  * 可重入锁: 锁可以延续使用

@@ -1,4 +1,4 @@
-package com.feibai.study.demos.multithread.advanced.t01_review;
+package com.feibai.study.demos.multithread.volatile_test;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +12,7 @@ import java.util.List;
  * 
  * 不是加锁问题，只是内存数据可见。
  */
-public class Test_10_Volatile {
+public class Volatile_test02 {
 
 	/*volatile*/ int count = 0;
 
@@ -23,7 +23,7 @@ public class Test_10_Volatile {
 	}
 
 	public static void main(String[] args) {
-		final Test_10_Volatile t = new Test_10_Volatile();
+		final Volatile_test02 t = new Volatile_test02();
 		List<Thread> threads = new ArrayList<>();
 		for (int i = 0; i < 10; i++) {
 			threads.add(new Thread(new Runnable() {

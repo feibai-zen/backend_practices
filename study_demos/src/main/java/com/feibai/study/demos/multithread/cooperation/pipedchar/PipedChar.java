@@ -7,7 +7,7 @@ import java.io.*;
  * <p>
  * 写入线程先启动后，由于没有数据被读取，管道中的缓冲区大小超过1024byte后，写入数据out.write(bytes)方法将被阻塞。后续读取线程开启后，读取缓冲区数据后，写入线程还能继续写入
  */
-public class Cooperation_PipedChar {
+public class PipedChar {
 
   public static void main(String[] args) {
     try {

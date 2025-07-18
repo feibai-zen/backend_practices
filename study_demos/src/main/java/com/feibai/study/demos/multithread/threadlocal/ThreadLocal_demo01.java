@@ -1,4 +1,4 @@
-package com.feibai.study.demos.multithread.advanced.t05_threadlocal;
+package com.feibai.study.demos.multithread.threadlocal;
 
 /**
  * ThreadLocal
@@ -22,39 +22,31 @@ import java.util.concurrent.TimeUnit;
 
 public class ThreadLocal_demo01 {
 
-  volatile static String name = "zhangsan";
-  static ThreadLocal<String> tl = new ThreadLocal<>();
+    private volatile static String name = "zhangsan";
+    private static final ThreadLocal<String> threadlocal = new ThreadLocal<>();
 
-  public static void main(String[] args) {
-    new Thread(new Runnable() {
-      @Override
-      public void run() {
-        try {
-          TimeUnit.SECONDS.sleep(2);
-        } catch (InterruptedException e) {
-          e.printStackTrace();
-        }
-        tl.set(name);
-        System.out.println(tl.get());
-      }
-    }).start();
+    public static void main(String[] args) {
+        new Thread(() -> {
+            try {
+                TimeUnit.SECONDS.sleep(2);
+            } catch (InterruptedException ignored) {
+            }
+            threadlocal.set(name);
+            System.out.println(threadlocal.get());
+        }).start();
 
-    new Thread(new Runnable() {
-      @Override
-      public void run() {
-        try {
-          TimeUnit.SECONDS.sleep(1);
-        } catch (InterruptedException e) {
-          e.printStackTrace();
-        }
-        name = "lisi";
-        tl.set("wangwu");
-        System.out.println(tl.get());
-      }
-    }).start();
+        new Thread(() -> {
+            try {
+                TimeUnit.SECONDS.sleep(1);
+            } catch (InterruptedException ignored) {
+            }
+            name = "lisi";
+            threadlocal.set("wangwu");
+            System.out.println(threadlocal.get());
+        }).start();
 
-    System.out.println("------------");
-    System.out.println(name);
-  }
+        System.out.println("------------");
+        System.out.println(name);
+    }
 
 }

@@ -1,4 +1,4 @@
-package com.feibai.study.demos.multithread.lock;
+package com.feibai.study.demos.multithread.deadlock;
 
 import java.util.concurrent.TimeUnit;
 

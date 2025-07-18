@@ -1,6 +1,8 @@
 package com.feibai.study.demos.multithread.cooperation;
 
 /**
+ *
+ * https://www.bilibili.com/video/BV1ct411n7oG/?t=392.1&p=223&vd_source=dcc95fcbd30595aaef4fea8f566a3de4
  * 协作模型:生产者消费者
  * <p>
  * 实现方式一:管程法 借助缓冲区
@@ -11,19 +13,19 @@ package com.feibai.study.demos.multithread.cooperation;
  *
  * @author feibai
  */
-public class Cooperation_Buffer_SteamedBun {
+public class SteamedBun_ProducerConsumer {
   public static void main(String[] args) {
     SynContainer container = new SynContainer();
-    new Productor(container).start();
+    new Producer(container).start();
     new Consumer(container).start();
   }
 }
 
 //生产者
-class Productor extends Thread {
+class Producer extends Thread {
   SynContainer container;
 
-  public Productor(SynContainer container) {
+  public Producer(SynContainer container) {
     this.container = container;
   }
 

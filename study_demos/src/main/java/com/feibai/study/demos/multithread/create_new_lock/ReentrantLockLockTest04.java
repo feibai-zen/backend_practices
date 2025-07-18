@@ -1,4 +1,4 @@
-package com.feibai.study.demos.multithread.lock;
+package com.feibai.study.demos.multithread.create_new_lock;
 
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -19,7 +19,7 @@ public class ReentrantLockLockTest04 {
 		System.out.println(lock.getHoldCount());
 	}
 
-	// 不可重入
+	// 可重入
 	public void doSomething() throws InterruptedException {
 		lock.lock();
 		System.out.println(lock.getHoldCount());

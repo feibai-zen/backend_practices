@@ -1,12 +1,12 @@
 package com.feibai.study.demos.demos.datastructure.datastructure;
 
+import com.feibai.study.demos.beans.Employee;
+
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeMap;
-
-import com.feibai.study.demos.beans.Employee;
 
 public class MyTreeMap {
 
