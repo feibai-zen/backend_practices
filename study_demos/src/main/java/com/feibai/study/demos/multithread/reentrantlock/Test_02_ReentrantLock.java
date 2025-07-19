@@ -1,4 +1,4 @@
-package com.feibai.study.demos.multithread.advanced.t03_reentrantlock;
+package com.feibai.study.demos.multithread.reentrantlock;
 
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;

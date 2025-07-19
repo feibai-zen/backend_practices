@@ -1,54 +1,47 @@
-package com.feibai.study.demos.multithread.advanced.t02;
+package com.feibai.study.demos.multithread.countdownlatch;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
 /**
- * feibai
- * <p>
  * 自定义容器，提供新增元素（add）和获取元素数量（size）方法。
  * 启动两个线程。线程1向容器中新增10个数据。线程2监听容器元素数量，当容器元素数量为5时，线程2输出信息并终止。
  */
-public class HomeWorkTest2<E> {
+public class CountDownLatch_test02<E> {
 
     private volatile List<E> list = new ArrayList();
+    CountDownLatch cdl = new CountDownLatch(5);
 
-    public synchronized void getSize() throws InterruptedException {
-        while (list.size() < 5) {
-            this.wait();
-        }
-        this.notify();
+    public int getSize() throws InterruptedException {
+        cdl.await();
         System.out.println("getSize.....");
+        return list.size();
     }
 
-    public synchronized void add(E element) throws InterruptedException {
+    public void add(E element) throws InterruptedException {
         for (int i = 0; i < 10; i++) {
             Thread.sleep(1000);
-            System.out.println("add ........." + i);
+            System.out.println("add ........." + (i + 1));
             list.add(element);
-            if (list.size() == 5) {
-                this.notifyAll();
-                this.wait();// 这里如果不调用wait()方法，线程就一直不会释放锁
-            }
+            cdl.countDown();
         }
     }
 
     public static void main(String[] args) {
-        HomeWorkTest2<Integer> test = new HomeWorkTest2();
+        CountDownLatch_test02<Integer> test = new CountDownLatch_test02();
+
         new Thread(() -> {
             try {
                 test.add(10);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+            } catch (InterruptedException ignored) {
             }
         }).start();
 
         new Thread(() -> {
             try {
                 test.getSize();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+            } catch (InterruptedException ignored) {
             }
         }).start();
     }
