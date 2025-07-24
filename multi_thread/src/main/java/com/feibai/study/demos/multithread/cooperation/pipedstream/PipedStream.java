@@ -11,34 +11,34 @@ import java.io.PipedOutputStream;
  */
 public class PipedStream {
 
-  public static void main(String[] args) {
-    try {
-      WriteData writeData = new WriteData();
-      ReadData readData = new ReadData();
+    public static void main(String[] args) {
+        try {
+            WriteData writeData = new WriteData();
+            ReadData readData = new ReadData();
 
-      PipedOutputStream out = new PipedOutputStream();
-      PipedInputStream in = new PipedInputStream();
+            PipedOutputStream out = new PipedOutputStream();
+            PipedInputStream in = new PipedInputStream();
 
-      //两个pipedStream建立通信连接
-      in.connect(out);
+            //两个pipedStream建立通信连接
+            in.connect(out);
 //      out.connect(in);
 
-      ThreadRead threadRead = new ThreadRead(in, readData, "thread-read");
-      ThreadWrite threadWrite = new ThreadWrite(out, writeData, "thread-write");
+            ThreadRead threadRead = new ThreadRead(in, readData, "thread-read");
+            ThreadWrite threadWrite = new ThreadWrite(out, writeData, "thread-write");
 
-      //先启动read线程
+            //先启动read线程
 //      threadRead.start();
 //      Thread.sleep(2000);
 //      threadWrite.start();
 
-      //先启动write线程
-      threadWrite.start();
-      Thread.sleep(12000);
-      threadRead.start();
-    } catch (IOException | InterruptedException e) {
-      e.printStackTrace();
-    }
+            //先启动write线程
+            threadWrite.start();
+            Thread.sleep(12000);
+            threadRead.start();
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
 
-  }
+    }
 
 }

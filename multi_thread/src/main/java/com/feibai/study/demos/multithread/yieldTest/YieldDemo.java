@@ -1,6 +1,10 @@
 package com.feibai.study.demos.multithread.yieldTest;
 
 
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.TreeMap;
+
 /**
  * 线程 yield() 是直接进入就绪状态，不是进入阻塞状态。
  */
@@ -11,7 +15,7 @@ public class YieldDemo implements Runnable {
         Thread t = new Thread(yieldDemo);
         t.start();
 
-        // 主綫程每隔20次会礼让一次
+        // 主线程每隔20次会礼让一次
         for (int i = 0; i < 1000; i++) {
             if (i % 20 == 0) {
                 Thread.yield();
