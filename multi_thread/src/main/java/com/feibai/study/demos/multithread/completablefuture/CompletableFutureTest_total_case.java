@@ -527,29 +527,27 @@ public class CompletableFutureTest_total_case {
      */
     @Test
     public void test13() throws Exception {
-        // 创建异步执行任务:
-        CompletableFuture<Double> cf = CompletableFuture.supplyAsync(() -> {
+        CompletableFuture<Double> cf1 = CompletableFuture.supplyAsync(() -> {
             System.out.println(Thread.currentThread() + " start job1,time->" + System.currentTimeMillis());
-            try {
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-            }
+
+            try {Thread.sleep(2000);} catch (InterruptedException e) {}
+
             System.out.println(Thread.currentThread() + " exit job1,time->" + System.currentTimeMillis());
             return 1.2;
         });
-        CompletableFuture<String> cf2 = cf.thenCompose((param) -> {
+
+        CompletableFuture<String> cf2 = cf1.thenCompose((param) -> {
             System.out.println(Thread.currentThread() + " start job2,time->" + System.currentTimeMillis());
-            try {
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-            }
+
+            try {Thread.sleep(2000);} catch (InterruptedException e) {}
+
             System.out.println(Thread.currentThread() + " exit job2,time->" + System.currentTimeMillis());
+
             return CompletableFuture.supplyAsync(() -> {
                 System.out.println(Thread.currentThread() + " start job3,time->" + System.currentTimeMillis());
-                try {
-                    Thread.sleep(2000);
-                } catch (InterruptedException e) {
-                }
+
+                try {Thread.sleep(2000);} catch (InterruptedException e) {}
+
                 System.out.println(Thread.currentThread() + " exit job3,time->" + System.currentTimeMillis());
                 return "job3 test";
             });
@@ -557,7 +555,7 @@ public class CompletableFutureTest_total_case {
 
         System.out.println("main thread start cf.get(),time->" + System.currentTimeMillis());
         //等待子任务执行完成
-        System.out.println("cf run result->" + cf.get());
+        System.out.println("cf run result->" + cf1.get());
         System.out.println("main thread start cf2.get(),time->" + System.currentTimeMillis());
         System.out.println("cf2 run result->" + cf2.get());
         System.out.println("main thread exit,time->" + System.currentTimeMillis());

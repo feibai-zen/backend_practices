@@ -1,12 +1,11 @@
 package com.feibai.study.spring.ioc;
 
-import com.feibai.study.spring.ioc.beans.lifecycle.JavaBeanLifeCycle;
 import com.feibai.study.spring.ioc.beans.lifecycle.JavaBeanLifeCycle2;
 import com.feibai.study.spring.ioc.beans.lifecycle.JavaBeanLifeCycle3;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-public class Spring_02_scope {
+public class Spring_03_scope {
 
     @Test
     public void getBeanWhichScopeIsSingleton() {

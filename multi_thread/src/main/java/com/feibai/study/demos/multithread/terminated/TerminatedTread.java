@@ -6,6 +6,9 @@ package com.feibai.study.demos.multithread.terminated;
  * @author feibai
  */
 public class TerminatedTread implements Runnable {
+    // 这里需要加volatile吗？ 我的理解是不需要加的，因为这里的flag 是Thread 类属性，主线程通过调用 terminateThread()
+    // 方法设置这个标志，线程可以立刻获得最新的值。如果该变量是线程间共享的变量，则需要加volatile 来保证可见性
+    // 为了保证可靠性，可以使用AtomicBoolean
     private boolean flag = true;
 
     public static void main(String[] args) {

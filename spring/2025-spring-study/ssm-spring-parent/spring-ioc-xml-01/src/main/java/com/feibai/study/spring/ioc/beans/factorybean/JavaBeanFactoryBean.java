@@ -2,12 +2,26 @@ package com.feibai.study.spring.ioc.beans.factorybean;
 
 import org.springframework.beans.factory.FactoryBean;
 
+import java.beans.ConstructorProperties;
+
 public class JavaBeanFactoryBean implements FactoryBean<JavaBean> {
+
+    private int age;
+    private String name;
+
+    @ConstructorProperties({"age", "name"})
+    public JavaBeanFactoryBean(int age, String name) {
+        this.age = age;
+        this.name = name;
+    }
 
     @Override
     public JavaBean getObject() throws Exception {
+        JavaBean javaBean = new JavaBean();
+        javaBean.setAge(this.age);
+        javaBean.setName(this.name);
 
-        return new JavaBean();
+        return javaBean;
     }
 
     @Override
@@ -19,4 +33,5 @@ public class JavaBeanFactoryBean implements FactoryBean<JavaBean> {
     public boolean isSingleton() {
         return FactoryBean.super.isSingleton();
     }
+
 }

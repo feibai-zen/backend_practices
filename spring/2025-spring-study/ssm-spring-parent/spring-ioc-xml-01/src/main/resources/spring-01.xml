@@ -74,6 +74,12 @@
 
 
     <!-- 9. 使用实现 FactoryBean 的方式创建Bean，适用于创建复杂对象-->
-    <bean id="javaBean" class="com.feibai.study.spring.ioc.beans.factorybean.JavaBeanFactoryBean"/>
+    <!-- JavaBean 的bean id 是 javaBean-->
+    <!-- JavaBeanFactoryBean 的bean id 是 &javaBean-->
+    <!-- 通过 JavaBeanFactoryBean 的属性，将 属性传递给 JavaBean-->
+    <bean id="javaBean" class="com.feibai.study.spring.ioc.beans.factorybean.JavaBeanFactoryBean">
+        <constructor-arg name="name" value="this is javabean name...."/>
+        <constructor-arg name="age" value="20"/>
+    </bean>
 
 </beans>

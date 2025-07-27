@@ -2,7 +2,7 @@ package com.feibai.study.demos.multithread.completablefuture;
 
 import java.util.concurrent.*;
 
-public class CompletableFutureAPI_processTheResult_withThenApply {
+public class CompletableFutureAPI_processTheResult_ThenApply {
 
     public static void main(String[] args) throws ExecutionException, InterruptedException, TimeoutException {
         ExecutorService pool = Executors.newFixedThreadPool(3);
@@ -16,7 +16,7 @@ public class CompletableFutureAPI_processTheResult_withThenApply {
             System.out.println("111");
             return 1;
         }, pool).thenApply(f -> {
-            int i = 10 / 0;
+//            int i = 10 / 0;
             System.out.println("222");
             return f + 1;
         }).thenApply(f -> {
@@ -33,7 +33,7 @@ public class CompletableFutureAPI_processTheResult_withThenApply {
         });
 
         System.out.println("the main thread to do other things.....");
-//        TimeUnit.SECONDS.sleep(5);
+//        TimeUnit.SECONDS.sleep(20);
 
         pool.shutdown(); // 线程执行完成之后，线程池才会被关闭
     }
