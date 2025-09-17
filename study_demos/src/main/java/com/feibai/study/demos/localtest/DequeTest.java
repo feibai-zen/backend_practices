@@ -13,8 +13,6 @@ public class DequeTest {
         deque.offer(3);
         System.out.println(deque.poll());
         System.out.println(deque);
-
     }
-
 
 }
