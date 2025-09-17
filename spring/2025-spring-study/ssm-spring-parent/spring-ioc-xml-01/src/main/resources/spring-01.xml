@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+
+    <!--1.使用无参构造函数实例化组件，即使构造函数是私有的也可以创建对象，因为底层使用的反射，会打破私有限制-->
+    <bean id="happyComponent1" class="com.feibai.study.spring.ioc.beans.HappyComponent"/>
+    <bean id="happyComponent2" class="com.feibai.study.spring.ioc.beans.HappyComponent"/>
+
+    <!--2.静态工厂类 bean 声明，createInstance 必须是静态方法-->
+    <bean id="clientService" class="com.feibai.study.spring.ioc.beans.ClientService" factory-method="createInstance"/>
+
+    <!--3.非静态工厂声明bean-->
+    <!--    3.1 配置工厂类的组件信息-->
+    <bean id="defaultServiceLocator" class="com.feibai.study.spring.ioc.beans.DefaultServiceLocator"/>
+    <!--    3.2 通过指定非静态工厂对象和方法来配置bean， createClientServiceInstance 必须是非静态的-->
+    <bean id="clientService2" factory-bean="defaultServiceLocator" factory-method="createClientServiceInstance"/>
+
+    <!--4. 依赖注入—— 一个参数的构造函数: 引用与被引用的对象都必须全部在容器中声明-->
+    <!--    4.1 -->
+    <bean id="userDao" class="com.feibai.study.spring.ioc.beans.UserDao"/>
+    <bean id="userService1" class="com.feibai.study.spring.ioc.beans.UserService">
+        <!--    4.2 注入被依赖的bean-->
+        <constructor-arg ref="userDao"/>
+    </bean>
+
+    <!--5. 依赖注入—— 多个参数的构造函数-->
+    <bean id="userService2" class="com.feibai.study.spring.ioc.beans.UserService">
+        <!-- 5.1 按照构造函数参数顺序填写值-->
+        <constructor-arg value="18"/>
+        <constructor-arg value="zhangsan"/>
+        <constructor-arg ref="userDao"/>
+    </bean>
+
+    <!--6. 依赖注入—— 多个参数的构造函数-->
+    <bean id="userService3" class="com.feibai.study.spring.ioc.beans.UserService">
+        <!-- 6.1 按照构造参数的名称填写，不用考虑顺序。推荐这种方式-->
+        <constructor-arg name="age" value="18"/>
+        <constructor-arg name="name" value="zhangsan"/>
+        <constructor-arg name="userDao" ref="userDao"/>
+    </bean>
+
+    <!--7. 依赖注入—— 多个参数的构造函数-->
+    <bean id="userService4" class="com.feibai.study.spring.ioc.beans.UserService">
+        <!-- 6.1 按照构造参数的下角标填写，不用考虑顺序。不推荐这种方式-->
+        <constructor-arg index="1" value="zhangsan"/>
+        <constructor-arg index="0" value="18"/>
+        <constructor-arg index="2" ref="userDao"/>
+    </bean>
+
+    <!--8. 依赖注入—— 基于Setter 方法进行注入-->
+    <bean id="movieFinder" class="com.feibai.study.spring.ioc.beans.MovieFinder"/>
+    <bean id="simpleMovieListener" class="com.feibai.study.spring.ioc.beans.SimpleMovieListener">
+        <property name="movieFinder" ref="movieFinder"/>
+        <property name="movieName" value="肖申克的救赎"/>
+    </bean>
+
+    <!-- bean 生命周期-->
+    <bean id="javaBeanLifeCycle" class="com.feibai.study.spring.ioc.beans.lifecycle.JavaBeanLifeCycle"
+          init-method="init_method_any"
+          destroy-method="destory_method_any"/>
+
+    <!-- bean scope -->
+    <bean id="javaBeanLifeCycle2" class="com.feibai.study.spring.ioc.beans.lifecycle.JavaBeanLifeCycle2"
+          scope="singleton"/>
+    <bean id="javaBeanLifeCycle3" class="com.feibai.study.spring.ioc.beans.lifecycle.JavaBeanLifeCycle3"
+          scope="prototype"/>
+
+
+    <!-- 9. 使用实现 FactoryBean 的方式创建Bean，适用于创建复杂对象-->
+    <!-- JavaBean 的bean id 是 javaBean-->
+    <!-- JavaBeanFactoryBean 的bean id 是 &javaBean-->
+    <!-- 通过 JavaBeanFactoryBean 的属性，将 属性传递给 JavaBean-->
+    <bean id="javaBean" class="com.feibai.study.spring.ioc.beans.factorybean.JavaBeanFactoryBean">
+        <constructor-arg name="name" value="this is javabean name...."/>
+        <constructor-arg name="age" value="20"/>
+    </bean>
+
+</beans>
